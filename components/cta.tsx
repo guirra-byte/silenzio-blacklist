@@ -14,7 +14,7 @@ export default function CTA() {
         <div className="flex items-center justify-center">
           <div className="flex w-fit items-center justify-center rounded-full bg-muted/80 text-center">
             <AnimatedShinyText className="px-4 py-1">
-              <span>Coming soon!</span>
+              <span>Silenzio Chegando em Breve...</span>
             </AnimatedShinyText>
           </div>
         </div>
@@ -30,14 +30,14 @@ export default function CTA() {
       <motion.div variants={itemVariants}>
         <TextBlur
           className="text-center text-3xl font-medium tracking-tighter sm:text-5xl"
-          text="A Simple Next.js Waitlist Template with Notion as CMS"
+          text="Recebeu uma ligação irritante? Não perca tempo! Denuncie agora e ajude a criar a maior Blacklist Colaborativa do país."
         />
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <TextBlur
           className="mx-auto max-w-[27rem] pt-1.5 text-center text-base text-zinc-300 sm:text-lg"
-          text="Join the waitlist to get early access of the product and recieve updates on the progress!"
+          text="Cada número reportado hoje será usado para alimentar o nosso futuro app de bloqueio de chamadas, que protegerá você e milhares de pessoas de ligações incômodas e golpes."
           duration={0.8}
         />
       </motion.div>

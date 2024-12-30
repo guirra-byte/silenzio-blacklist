@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChangeEvent } from "react";
+import { ChangeEvent, ChangeEventHandler, HTMLInputTypeAttribute } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
@@ -8,21 +8,25 @@ import { EnhancedButton } from "@/components/ui/enhanced-btn";
 import { containerVariants, itemVariants } from "@/lib/animation-variants";
 
 interface FormProps {
-  name: string;
-  email: string;
-  handleNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleEmailChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
+  email?: string;
+  phoneNumber?: string;
+  reason?: string;
+  handleReport: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: () => void;
+  handleBlacklist: () => void;
   loading: boolean;
 }
 
 export default function Form({
   name,
   email,
-  handleNameChange,
-  handleEmailChange,
+  reason,
+  phoneNumber,
+  handleReport,
   handleSubmit,
   loading,
+  handleBlacklist
 }: FormProps) {
   return (
     <motion.div
@@ -33,17 +37,42 @@ export default function Form({
       <motion.div variants={itemVariants}>
         <Input
           type="text"
-          placeholder="Your Name"
+          placeholder="Seu Nome"
+          required={true}
           value={name}
-          onChange={handleNameChange}
+          name="name"
+          onChange={handleReport}
         />
       </motion.div>
       <motion.div variants={itemVariants}>
         <Input
           type="email"
-          placeholder="Your Email Address"
+          placeholder="Seu Email"
+          name="email"
+          required={true}
           value={email}
-          onChange={handleEmailChange}
+          onChange={handleReport}
+        />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Input
+          type="tel"
+          name="phoneNumber"
+          required={true}
+          placeholder="Número de Telefone para Reportar"
+          value={phoneNumber}
+          onChange={handleReport}
+        />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Input
+          type="text"
+          name="reason"
+          placeholder="Possível Motivo da Ligação Indesejada"
+          required={false}
+          value={reason}
+          maxLength={25}
+          onChange={handleReport}
         />
       </motion.div>
       <motion.div variants={itemVariants}>
@@ -54,26 +83,20 @@ export default function Form({
           iconPlacement="right"
           className="mt-2 w-full"
           disabled={loading}>
-          {loading ? "Loading..." : "Join Waitlist!"}
+          {loading ? "Loading..." : "Contribuir com a Blacklist"}
         </EnhancedButton>
       </motion.div>
-      <motion.div
-        variants={itemVariants}
-        className="mt-4 flex w-full items-center justify-center gap-1 text-muted-foreground">
-        <p>For any queries, reach out at </p>
-        <Link
-          href="https://x.com/blakssh"
-          rel="noopener noreferrer"
-          target="_blank">
-          <FaXTwitter className="h-4 w-4 transition-all duration-200 ease-linear hover:text-yellow-200" />
-        </Link>
-        or
-        <Link
-          href="https://github.com/lakshaybhushan"
-          rel="noopener noreferrer"
-          target="_blank">
-          <FaGithub className="ml-0.5 h-5 w-5 transition-all duration-200 ease-linear hover:text-yellow-200" />
-        </Link>
+
+      <motion.div variants={itemVariants}>
+        <EnhancedButton
+          variant="expandIcon"
+          Icon={FaArrowRightLong}
+          onClick={handleBlacklist}
+          iconPlacement="right"
+          className="mt-2 w-full"
+          disabled={loading}>
+          {"Acessar a Blacklist"}
+        </EnhancedButton>
       </motion.div>
     </motion.div>
   );
